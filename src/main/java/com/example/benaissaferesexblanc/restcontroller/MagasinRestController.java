@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("magasin")
 @AllArgsConstructor
-public class MagasinRestController {dd
+public class MagasinRestController {
     IMagasinService iMagasinService;
     @PostMapping("addMagasinEtPersonnels")
     Magasin addMagasinEtPersonnel(@RequestBody Magasin m) {

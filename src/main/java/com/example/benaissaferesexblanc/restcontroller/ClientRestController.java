@@ -3,10 +3,7 @@ package com.example.benaissaferesexblanc.restcontroller;
 import com.example.benaissaferesexblanc.dao.entites.Client;
 import com.example.benaissaferesexblanc.services.client.IClientService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("client")
@@ -17,4 +14,9 @@ public class ClientRestController {
     Client addOrUpdate(@RequestBody Client c) {
         return iClientService.ajouterClient(c);
     }
+    @PostMapping("affecterClientAMagasin")
+    void affecterClientAMagasin(@RequestParam  int idClient,@RequestParam int idMagasin){
+        iClientService.affecterClientAMagasin(idClient,idMagasin);
+    };
+
 }
