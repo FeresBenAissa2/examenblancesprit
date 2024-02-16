@@ -7,6 +7,8 @@ import com.example.benaissaferesexblanc.dao.repositories.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 @AllArgsConstructor
 public class CarteService implements ICarteService{
@@ -14,6 +16,8 @@ public class CarteService implements ICarteService{
     CarteFidRepository carteFidRepository;
     @Override
     public void ajouterCarteEtAffecterClient(CarteFid carteFid, long cin) {
+        carteFid.setSolde(0);
+        carteFid.setDateCreation(LocalDate.now());
         CarteFid carte = carteFidRepository.save(carteFid);
         Client client = clientRepository.findByCin(cin);
         client.setCarteFid(carte);
