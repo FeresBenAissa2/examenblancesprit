@@ -5,6 +5,8 @@ import com.example.benaissaferesexblanc.services.client.IClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("client")
 @AllArgsConstructor
@@ -18,5 +20,9 @@ public class ClientRestController {
     void affecterClientAMagasin(@RequestParam  int idClient,@RequestParam int idMagasin){
         iClientService.affecterClientAMagasin(idClient,idMagasin);
     };
+    @PostMapping("afficherClient")
+    List<Client> afficherClients(@RequestParam  String nomMagasin){
+       return iClientService.afficherClients(nomMagasin);
+    }
 
 }

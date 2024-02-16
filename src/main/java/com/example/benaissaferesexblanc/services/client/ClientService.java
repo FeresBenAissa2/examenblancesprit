@@ -7,6 +7,8 @@ import com.example.benaissaferesexblanc.dao.repositories.MagasinRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ClientService implements IClientService{
@@ -24,5 +26,11 @@ public class ClientService implements IClientService{
         client.getMagasins().add(magasin);
         clientRepository.save(client);
 
+    }
+
+    @Override
+    public List<Client> afficherClients(String nomMagasin) {
+        Magasin magasin = magasinRepository.findMagasinByNomMagasin(nomMagasin);
+        return magasin.getClients();
     }
 }
