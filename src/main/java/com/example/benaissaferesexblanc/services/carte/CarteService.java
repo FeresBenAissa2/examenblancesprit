@@ -23,4 +23,23 @@ public class CarteService implements ICarteService{
         client.setCarteFid(carte);
         clientRepository.save(client);
     }
+
+    @Override
+    public long effectuerOperation(String typeOperation, long numCarte, int montant) {
+        CarteFid carteFid = carteFidRepository.findByNumeroCarte(numCarte);
+        long ancienSolde = carteFid.getSolde();
+        long nouveauMontant=0;
+        if(typeOperation.equals("+")){
+             nouveauMontant = ancienSolde+montant;
+            carteFid.setSolde(nouveauMontant);
+            carteFidRepository.save(carteFid);
+            return nouveauMontant;
+        }else if (typeOperation.equals("-")){
+             nouveauMontant = ancienSolde-montant;
+            carteFid.setSolde(nouveauMontant);
+            carteFidRepository.save(carteFid);
+            return nouveauMontant;
+        }
+        return nouveauMontant;
+    }
 }
