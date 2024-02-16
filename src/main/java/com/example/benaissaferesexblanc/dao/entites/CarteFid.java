@@ -1,12 +1,10 @@
 package com.example.benaissaferesexblanc.dao.entites;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
@@ -14,9 +12,13 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Test {
+public class CarteFid {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long idTest;
+    int idCarte;
+    @Column(unique=true)
+    long numeroCarte;
+    long solde;
+    LocalDate dateCreation ;
 
 }
