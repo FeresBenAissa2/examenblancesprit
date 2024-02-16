@@ -21,10 +21,10 @@ public class Magasin {
     String addresseMagasin;
     long contactMagasin ;
 
-    @OneToOne (mappedBy = "magasin")
+    @OneToOne (mappedBy = "magasin",cascade = CascadeType.ALL)
     Personnel directeur;
 
-    @OneToMany(mappedBy = "magasinC")
+    @OneToMany(mappedBy = "magasinC",cascade = CascadeType.ALL)
     List<Personnel> cassiers;
 
     @ManyToMany(mappedBy = "magasins")
