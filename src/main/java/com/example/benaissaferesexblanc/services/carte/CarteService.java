@@ -32,14 +32,11 @@ public class CarteService implements ICarteService{
         if(typeOperation.equals("+")){
              nouveauMontant = ancienSolde+montant;
             carteFid.setSolde(nouveauMontant);
-            carteFidRepository.save(carteFid);
-            return nouveauMontant;
         }else if (typeOperation.equals("-")){
              nouveauMontant = ancienSolde-montant;
             carteFid.setSolde(nouveauMontant);
-            carteFidRepository.save(carteFid);
-            return nouveauMontant;
         }
+        carteFidRepository.save(carteFid);
         return nouveauMontant;
     }
 }

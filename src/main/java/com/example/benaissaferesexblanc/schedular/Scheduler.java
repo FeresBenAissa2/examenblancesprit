@@ -1,6 +1,10 @@
 package com.example.benaissaferesexblanc.schedular;
 
 
+import com.example.benaissaferesexblanc.dao.entites.CarteFid;
+import com.example.benaissaferesexblanc.dao.entites.Client;
+import com.example.benaissaferesexblanc.dao.entites.Magasin;
+import com.example.benaissaferesexblanc.dao.repositories.MagasinRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -8,44 +12,27 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Set;
 
 @Component
 @AllArgsConstructor
 @Slf4j
 public class Scheduler {
-//    UtilistateurService utilistateurService;
-@Scheduled(cron = "0 * * * * *")
-//    void service1() {
-//        iChambreService.listeChambresParBloc();
-//    }
-//
-//    @Scheduled(fixedRate = 30000)
-//// 5 minutes = 300 secondes = 300000 millisecondes
-//    void service2() {
-//        iChambreService.pourcentageChambreParTypeChambre();
-//    }
-//
-//    @Scheduled(fixedRate = 30000)
-//    void service3() {
-//        iChambreService.nbPlacesDisponibleParChambreAnneeEnCours();
-//    }
-//    @Scheduled(cron = "* * * 30 06 *")
-//    void service4() {
-//        iReservationService.annulerReservations();
-//    }
-    @Scheduled(cron = "0/5 * * * * *" )
-    public String afficher() {
-//        List<Utilisateur> utilisateurs= utilistateurService.getAllLecteurs();
-//        String userString = "\n List des Lecteurs : \n ";
-//        for(Utilisateur u : utilisateurs){
-//           if(calculateDayDifference(u.getDateFinAbonnement(),LocalDate.now())<2)
-//               userString+=u.getNom()+" "+u.getPrenom()+"\n";
-//        }
-//        log.info(userString);
-//        return userString;
-        return null;
+    MagasinRepository magasinRepository;
+
+    @Scheduled(cron = "0 0 8 * * *")
+    public void totalSolde(){
+        double somme = 0.0;
+        List<Magasin> listMagasin = magasinRepository.findAll();
+        for (Magasin magasin : listMagasin) {
+            List<Client> clients = magasin.getClients();
+            for (Client client : clients) {
+                somme += client.getCarteFid().getSolde();
+            }
+            log.info("Magasin => Bonus Solde " + somme);
+            somme=0.0;
+        }
     }
-    public static long calculateDayDifference(LocalDate date1, LocalDate date2) {
-        return ChronoUnit.DAYS.between(date1, date2);
-    }
+
 }
